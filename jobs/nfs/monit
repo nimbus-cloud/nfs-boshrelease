@@ -1,0 +1,5 @@
+check process nfs
+  with pidfile /var/vcap/sys/run/nfs/nfs.pid
+  start program "/var/vcap/jobs/nfs/bin/monit_debugger nfs_ctl '/var/vcap/jobs/nfs/bin/nfs_ctl start'"
+  stop program "/var/vcap/jobs/nfs/bin/monit_debugger nfs_ctl '/var/vcap/jobs/nfs/bin/nfs_ctl stop'"
+  group vcap
