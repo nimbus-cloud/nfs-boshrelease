@@ -1,0 +1,31 @@
+---
+meta:
+  environment: (( merge ))
+  dns_root: (( merge ))
+  persistent_disk: 4096
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+  - name: nfs_z1
+    instances: 1
+    networks:
+      - name: nfs1
+        static_ips: (( static_ips(0) ))
+    persistent_disk: (( meta.persistent_disk ))
+
+compilation:
+  cloud_properties:
+    ram: 4096
+    disk: 30000
+    cpu: 2
+
+resource_pools:
+- name: small_z1
+  cloud_properties:
+    ram: 4096
+    disk: 30000
+    cpu: 2
+
+networks: (( merge ))

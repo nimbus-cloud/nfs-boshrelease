@@ -1,5 +1,10 @@
 meta:
   environment: ~
+  nfs_server:
+    address: (( jobs.nfs_z1.networks.nfs1.static_ips.[0] || nil ))
+    allow_from_entries:
+      - (( .networks.nfs1.subnets.[0].range || nil ))
+    share: ~
 
 update:
   canaries: 1
@@ -9,28 +14,15 @@ update:
   serial: false
 
 jobs:
-  - name: nfs_leader_z1
-    templates:
-    - name: nfs
-      release: nfs
-    instances: 0
-    resource_pool: small_z1
-    networks: (( merge ))
-    persistent_disk: 0
-    properties: {}
   - name: nfs_z1
     templates:
-    - name: nfs
-      release: nfs
+    - name: debian_nfs_server
     instances: 0
     resource_pool: small_z1
     networks: (( merge ))
     persistent_disk: 0
-    update:
-      canaries: 10
     properties:
-      nfs:
-        leader_address: (( merge ))
+      nfs_server: (( meta.nfs_server ))
 
 networks: (( merge ))
 

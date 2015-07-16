@@ -1,1 +1,5 @@
---- {}
+---
+debian_nfs_server/nfs-kernel-server_1.2.0-4ubuntu4.2_amd64.deb/nfs-kernel-server_1.2.0-4ubuntu4.2_amd64.deb:
+  object_id: e35856da-a4a9-4a7c-bed0-dc3ddfb31598
+  sha: 2ec33a5319657a881b7b1cd8a9e1adf6a8312318
+  size: 170310
