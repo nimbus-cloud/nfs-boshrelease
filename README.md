@@ -42,4 +42,18 @@ By default the version number will be bumped to the next major number. You can s
 bosh create release --final --version 2.1
 ```
 
+### Publish release on Github
+
+pre requirements:
+
+```
+  go get github.com/aktau/github-release
+  export GITHUB_TOKEN=your-github-token #see: https://help.github.com/articles/creating-an-access-token-for-command-line-use/
+```
+
+Generate new final release with tags and tgz.
+
+
+
+
 After the first release you need to contact [Dmitriy Kalinin](mailto://dkalinin@pivotal.io) to request your project is added to https://bosh.io/releases (as mentioned in README above).

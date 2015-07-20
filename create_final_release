@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e
+
+USAGE="Usage: final_release VERSION 'Description of the release'"
+
+github-release info \
+  --user compozed \
+  --repo $RELEASE_NAME-boshrelease\
+
+if [[ $# -ne 2 ]]; then
+  echo "Illegal number of parameters"
+  echo $USAGE
+  exit
+fi
+
+
+RELEASE_NAME=nfs
+RELEASE_DIR=~/workspace/$RELEASE_NAME-boshrelease
+VERSION=$1
+
+
+
+git stash
+
+# echo "Creates bosh final release"
+# bosh create release --final --version $VERSION --force 
+
+git ci
+git stash pop
+
+echo "Creating git tag v$VERSION"
+git tag v$VERSION
+
+echo "Push git tag v$VERSION"
+git push --tags
+
+# echo "Creates github release"
+# ./github-release release \
+  # --user compozed \
+  # --repo $RELEASE_NAME-boshrelease\
+  # --tag v$VERSION \
+  # --name "Release v$VERSION" \
+  # --description "$2" \
+  # --pre-release
