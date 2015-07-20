@@ -1,8 +1,8 @@
 meta:
   environment: nfs-warden
-
+  persistent_disk: 4096
   stemcell:
-    name: bosh-warden-boshlite-ubuntu
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
     version: latest
 
 update:
@@ -12,19 +12,12 @@ update:
   update_watch_time: 1000-30000
 
 jobs:
-  - name: nfs_leader_z1
+  - name: nfs_z1
     instances: 1
     networks:
       - name: nfs1
         static_ips: (( static_ips(0) ))
-  - name: nfs_z1
-    instances: 2
-    networks:
-      - name: nfs1
-        static_ips: ~
-    properties:
-      nfs:
-        leader_address: (( jobs.nfs_leader_z1.networks.nfs1.static_ips.[0] ))
+    persistent_disk: (( meta.persistent_disk ))
 
 compilation:
   cloud_properties:
