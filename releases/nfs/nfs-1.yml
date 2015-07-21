@@ -1,0 +1,29 @@
+---
+packages:
+- name: common
+  version: 99c756b71550530632e393f5189220f170a69647
+  fingerprint: 99c756b71550530632e393f5189220f170a69647
+  sha1: 7485a28a41a818147959d6c7fa9202e35afb2240
+  dependencies: []
+- name: debian_nfs_server
+  version: f174edca628fbe8930b48d014642d02297431917
+  fingerprint: f174edca628fbe8930b48d014642d02297431917
+  sha1: e62208823e80153e3aef527cba27dd9990297a68
+  dependencies: []
+jobs:
+- name: nfs_mounter
+  version: e597e616003791ea243cf1d49880a90088c1129e
+  fingerprint: e597e616003791ea243cf1d49880a90088c1129e
+  sha1: fb510993caeccab211eca4329bfe10d658ef6e76
+- name: debian_nfs_server
+  version: 13099c08680423cb750cfa3f1868277d7f9d8631
+  fingerprint: 13099c08680423cb750cfa3f1868277d7f9d8631
+  sha1: 7d74800914c7a0dce52b19fb0859d2ce624c701d
+license:
+  version: d2a30850d1f007eb59a6710918da0abc17692263
+  fingerprint: d2a30850d1f007eb59a6710918da0abc17692263
+  sha1: ef822d9ee5114b213af359198c3ea7a92e80ec39
+commit_hash: f1f9e583
+uncommitted_changes: true
+name: nfs
+version: '1'
