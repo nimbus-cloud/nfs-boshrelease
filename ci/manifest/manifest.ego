@@ -1,0 +1,62 @@
+<%! func ManifestTmpl(w io.Writer, config Config) error %>
+<%% import . "github.com/compozed/travel-agent/models" %%>
+---
+jobs:
+<% for _, env := range config.Envs { %>
+- name: <%= env.Name %>
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: deployments
+    - get: nfs-release
+    - get: nfs
+<% if env.DependsOn != "" {%>
+      passed: [ <%= env.DependsOn %> ]
+<% } %>
+  - task: vsphere-stemcell
+    file: nfs/ci/tasks/download.yml
+    config:
+      params: (( grab config.vsphere_stemcell_download_params ))
+  - task: spruce-merge
+    file: nfs/ci/tasks/spruce-merge.yml
+    config:
+      params:
+        files: deployments/<%= env.Name %>/<%= config.Name %>/templates/manifest.yml deployments/<%= env.Name %>/<%= config.Name %>/stub.yml
+  - put: <%= env.Name %>-deployment
+    params:
+      manifest: spruce-merge/manifest.yml
+      releases:
+      - nfs-release/*.tgz
+      stemcells:
+      - vsphere-stemcell/*.tgz
+<% } %>
+resources:
+<% for _, env := range config.Envs { %>
+- name: <%= env.Name %>-deployment
+  type: bosh-deployment
+  source:
+    target: (( param "Set bosh target for nfs deployment" ))
+    username: (( param "Set bosh username for nfs deployment" ))
+    password: (( param "Set bosh password for nfs deployment" ))
+    deployment: (( param "Set deployment name" ))
+<% } %>
+
+- name: deployments
+  type: git
+  source:
+    branch: master
+    uri: (( param "Provide deployments git uri" ))
+    private_key: (( param "Provide deployments git private key" ))
+
+- name: nfs
+  type: git
+  source:
+    branch: master
+    uri: (( param "Provide nfs git uri" ))
+    private_key: (( param "Provide nfs git private key" ))
+
+- name: nfs-release
+  source:
+    repository: compozed/nfs-boshrelease
+  type: bosh-io-release

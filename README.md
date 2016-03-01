@@ -52,3 +52,4 @@ git push --tags
 ```
 
 After the first release you need to contact [Dmitriy Kalinin](mailto://dkalinin@pivotal.io) to request your project is added to https://bosh.io/releases (as mentioned in README above).
+# nfs-boshrelease
