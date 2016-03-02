@@ -1,0 +1,7 @@
+#!/bin/bash
+# vim: set ft=sh
+
+set -e -x
+
+env 
+spruce merge $files > manifest.yml

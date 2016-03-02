@@ -1,0 +1,10 @@
+#!/bin/sh
+# vim: set ft=sh
+
+set -e 
+set -x 
+
+env
+
+wget -O $dest --post-data='' --header="Authorization: Token $token" --no-check-certificate $url
+

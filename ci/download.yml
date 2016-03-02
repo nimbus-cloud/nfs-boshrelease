@@ -1,0 +1,12 @@
+
+---
+platform: linux
+image: docker:///compozed/wget
+
+inputs:
+- name: nfs
+
+params: {}
+
+run:
+  path: nfs/ci/scripts/download

@@ -15,11 +15,11 @@ jobs:
       passed: [ <%= env.DependsOn %> ]
 <% } %>
   - task: vsphere-stemcell
-    file: nfs/ci/tasks/download.yml
+    file: nfs/ci/download.yml
     config:
       params: (( grab config.vsphere_stemcell_download_params ))
   - task: spruce-merge
-    file: nfs/ci/tasks/spruce-merge.yml
+    file: nfs/ci/spruce-merge.yml
     config:
       params:
         files: deployments/<%= env.Name %>/<%= config.Name %>/templates/manifest.yml deployments/<%= env.Name %>/<%= config.Name %>/stub.yml
