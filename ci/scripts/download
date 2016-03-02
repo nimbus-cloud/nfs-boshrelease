@@ -2,9 +2,14 @@
 # vim: set ft=sh
 
 set -e 
-set -x 
+set -x
 
-env
+if [ -n "$token" ]; then
+  wget_args="--post-data='' --header='Authorization: Token $token'"
+fi
 
-wget -O $dest --post-data='' --header="Authorization: Token $token" --no-check-certificate $url
-
+if [ -z "$dest" ]; then
+  curl -k -O $url
+else 
+  eval "wget -O $dest --no-check-certificate $wget_args $url"
+fi
