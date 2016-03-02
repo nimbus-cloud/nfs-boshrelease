@@ -1,7 +1,8 @@
 
 ---
 platform: linux
-image: docker:///compozed/wget
+image: docker:///concourse/busyboxplus#curl
+
 
 inputs:
 - name: nfs
