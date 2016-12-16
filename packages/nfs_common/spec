@@ -1,4 +1,4 @@
 ---
-name: common
+name: nfs_common
 files:
 - common/utils.sh

@@ -1,6 +1,6 @@
 ---
 packages:
-- name: common
+- name: nfs_common
   version: 99c756b71550530632e393f5189220f170a69647
   fingerprint: 99c756b71550530632e393f5189220f170a69647
   sha1: 7485a28a41a818147959d6c7fa9202e35afb2240
